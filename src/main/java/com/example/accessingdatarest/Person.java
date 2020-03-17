@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 
 @Entity
 public class Person {
@@ -12,17 +13,21 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotEmpty
     private String name;
+
+    @Min(0)
+    @Max(150)
     private int age;
-    private boolean isALive;// = true;
+    private boolean active = true;
 
     // constructors
     protected Person(){}
 
-    public Person(String name, int age, boolean isALive){
+    public Person(String name, int age, boolean active){
         this.name = name;
         this.age = age;
-        this.isALive = isALive;
+        this.active = active;
     }
 
     // Get and Set methods
@@ -42,12 +47,12 @@ public class Person {
         this.age = age;
     }
 
-    public boolean getIsAlive(){
-        return this.isALive;
+    public boolean getActive(){
+        return this.active;
     }
 
-    public void setIsAlive(Boolean isAlive){
-        this.isALive = isAlive;
+    public void setActive(Boolean active){
+        this.active = active;
     }
 }
 

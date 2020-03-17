@@ -1,16 +1,18 @@
 package com.example.accessingdatarest;
 
 import java.util.List;
- 
-import org.springframework.data.repository.PagingAndSortingRepository;
+
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
-// change multiple of person
-@RepositoryRestResource(collectionResourceRel = "people", path = "people")
-public interface PersonRepository extends PagingAndSortingRepository<Person, Long>{
+// Class for interacting with the database
+@Repository
+public interface PersonRepository extends CrudRepository<Person, Long>{
 
+    // Define search options
     List<Person> findByName(@Param("name") String name);
     List<Person> findByAge(@Param("age") int age);
-    // List<Person> findByIsAlive(@Param("isAlive") boolean isAlive);
+    List<Person> findByactiveTrue();
+    List<Person> findByactiveFalse();
 }
